@@ -4,12 +4,13 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
-
+const port = 3500;
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(fileUpload())
+
 
 // connect mongo db
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.aew8x.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -162,4 +163,4 @@ client.connect(err => {
 });
 
 
-app.listen('3500', ()=> console.log('App is running at port 3500'));
+app.listen(process.env.PORT || port, ()=> console.log('App is running at port 3500'));
